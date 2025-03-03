@@ -9,6 +9,7 @@ import { persistStore } from "redux-persist";
 import rtkStore from "~/src/infrastructure/redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { ReduxProvider } from "~/src/infrastructure/redux/provider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -46,20 +47,13 @@ const RootLayout = () => {
   }
 
   return (
-    <Provider store={rtkStore}>
-      <PersistGate
-        loading={<Text>Loading persisted data... !!!!</Text>}
-        persistor={persistor}
-      >
-        <SafeAreaProvider>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          ></Stack>
-        </SafeAreaProvider>
-      </PersistGate>
-    </Provider>
+    <ReduxProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      ></Stack>
+    </ReduxProvider>
   );
 };
 

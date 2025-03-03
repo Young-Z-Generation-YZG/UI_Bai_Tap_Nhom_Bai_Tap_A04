@@ -25,7 +25,7 @@ const Header = ({ navigation, options, rightContent }: HeaderProps) => {
               onPress={() => navigation.goBack()}
             >
               {/* <Text style={styles.backIcon}>←</Text> */}
-              <SvgIcons.ArrowLeftIcon width={40} height={40}/>
+              <SvgIcons.ArrowLeftIcon width={40} height={40} />
             </TouchableOpacity>
           )}
         </View>
