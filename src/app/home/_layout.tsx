@@ -2,7 +2,9 @@ import "react-native-gesture-handler";
 import React from "react";
 import Header from "@components/Header";
 import { Stack } from "expo-router";
-import { TouchableOpacity, Text } from "react-native";
+import UserCircle from "@components/ui/user-circle";
+import { View } from "react-native";
+import SvgIcons from '@constants/svg-icons'
 
 const HomeLayout = () => {
   return (
@@ -12,10 +14,11 @@ const HomeLayout = () => {
         header: (props) => (
           <Header
             {...props}
-            rightContent={
-              <TouchableOpacity onPress={() => console.log("Settings pressed")}>
-                <Text style={{ fontSize: 16, color: "#1f2937" }}>⚙️</Text>
-              </TouchableOpacity>
+            rightContent={ 
+              <View className="flex flex-row items-center gap-6">
+                <SvgIcons.BellIcon width={30} height={30}/>
+                <UserCircle />
+              </View>
             }
           />
         ),
