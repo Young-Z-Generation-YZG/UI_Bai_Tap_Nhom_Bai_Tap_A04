@@ -16,7 +16,9 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import { authApi } from "~/src/infrastructure/redux/apis/auth.api";
+import { categoryApi } from "~/src/infrastructure/redux/apis/category.api";
 import { postsApi } from "~/src/infrastructure/redux/apis/post.api";
+import { productsApi } from "~/src/infrastructure/redux/apis/product.api";
 import authSlice from "~/src/infrastructure/redux/features/auth/auth.slice";
 
 const persistConfig: PersistConfig<ReturnType<typeof reducers>> = {
@@ -52,6 +54,8 @@ const reducers = combineReducers({
   auth: authSlice,
   [authApi.reducerPath]: authApi.reducer,
   [postsApi.reducerPath]: postsApi.reducer,
+  [categoryApi.reducerPath]: categoryApi.reducer,
+  [productsApi.reducerPath]: productsApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -67,6 +71,8 @@ const reduxStore = configureStore({
       // Add middleware without including them in the blacklist
       authApi.middleware,
       postsApi.middleware,
+      categoryApi.middleware,
+      productsApi.middleware,
       rtkQueryLoggerMiddleware
     ),
   enhancers: getEnhancers,

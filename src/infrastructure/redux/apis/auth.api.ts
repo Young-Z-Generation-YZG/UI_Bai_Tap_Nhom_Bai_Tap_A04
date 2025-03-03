@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ILoginPayload } from "~/src/domain/interfaces/auth/ILoginPayload";
+// import { ILoginPayload } from "~/src/domain/interfaces/auth/ILoginPayload";
 import { setAccessToken } from "~/src/infrastructure/redux/features/auth/auth.slice";
 import { loginResponseType } from "~/src/infrastructure/types/auth.type";
 
@@ -11,7 +11,7 @@ export const authApi = createApi({
   }),
   endpoints: (builder) => ({
     loginAsync: builder.mutation({
-      query: (payload: ILoginPayload) => ({
+      query: (payload) => ({
         url: "login",
         method: "POST",
         body: payload,
