@@ -1,9 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { useGetPostsAsyncQuery } from "~/src/infrastructure/redux/apis/post.api";
 import { logger } from "react-native-logs";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { Carousel } from "react-native-ui-lib";
 // Explain how component is rendered
 /**
  * state 1: At first mount, the HomeScreen component will call the useGetPostsAsyncQuery hook to fetch posts from the server. (automatically called by the hook under the hood)
@@ -11,6 +11,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
  * state 2: The component will render a View component. (still no data)
  * state 3: data is fetched from the server and the component will re-render with the fetched data. (data is now available)
  */
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const HomeScreen = () => {
   var log = logger.createLogger();
 
@@ -45,12 +47,31 @@ const HomeScreen = () => {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Text className="mt-5 text-xl text-center font-TenorSans-Regular">
         Home Screen
       </Text>
-
-      <FlatList
+      <View className="w-full">
+        <Carousel
+          autoplay
+          // animated
+          pageWidth={SCREEN_WIDTH}
+          itemSpacings={0}
+          // containerMarginHorizontal={40}
+          initialPage={0}
+          // pageControlPosition={Carousel.pageControlPositions.UNDER}
+          // allowAccessibleLayout
+          // className="bg-green-200"
+        >
+          {Array.from({ length: 10 }).map((_, index) => (
+              <View key={index} className="h-[300px] border w-full bg-red-300">
+                <Text>Card: {index}</Text>
+                {/* <ProductItemCard/> */}
+              </View>
+          ))}
+        </Carousel>
+      </View>
+      {/* <FlatList
         className="px-5 mt-5"
         data={posts}
         keyExtractor={(item) => item.id.toString()}
@@ -62,8 +83,8 @@ const HomeScreen = () => {
             <Text className="font-TenorSans-Regular">Content: {item.body}</Text>
           </View>
         )}
-      />
-    </View>
+      /> */}
+    </ScrollView>
   );
 };
 

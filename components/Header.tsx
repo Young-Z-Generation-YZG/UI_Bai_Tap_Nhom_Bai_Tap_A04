@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SvgIcons from "@constants/svg-icons";
 
 type HeaderProps = NativeStackHeaderProps & {
   rightContent?: React.ReactNode; // Optional content for the right side
@@ -23,7 +24,8 @@ const Header = ({ navigation, options, rightContent }: HeaderProps) => {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Text style={styles.backIcon}>←</Text>
+              {/* <Text style={styles.backIcon}>←</Text> */}
+              <SvgIcons.ArrowLeftIcon width={40} height={40}/>
             </TouchableOpacity>
           )}
         </View>
