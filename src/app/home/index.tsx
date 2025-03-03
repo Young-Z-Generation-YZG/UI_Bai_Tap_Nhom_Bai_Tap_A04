@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useGetPostsAsyncQuery } from "~/src/infrastructure/redux/apis/post.api";
 import { logger } from "react-native-logs";
@@ -110,37 +110,44 @@ const HomeScreen = () => {
         
       </View>
       {/* Category Carousel */}
-      <View className="">
-        <Text>Categories</Text>
+      <View className="w-full">
+        <Text className="text-black text-2xl font-semibold text-center uppercase mt-5 mb-3 underline">Categories</Text>
         <Carousel
           // autoplay
           pageWidth={120}
-          // containerMarginHorizontal={100}
+          containerMarginHorizontal={0}
           initialPage={0}
           itemSpacings={10}
         >
           {categoriesData.map((category) => (
-            <View key={category._id} className="h-fit w-full bg-blue-200">
-              <Text className="text-center text-xl underline">{category.category_name}</Text>
-            </View>
+            <TouchableOpacity key={category._id} className="h-[120px] w-full rounded-2xl bg-black flex justify-center items-center">
+              <Text className="text-white text-xl text-center ">{category.category_name}</Text>
+            </TouchableOpacity>
           ))}
         </Carousel>
       </View>
 
       {/* Product Carousel */}
       <View>
-        <Text>Products</Text>
+        <Text className="text-black text-2xl font-semibold text-center uppercase mt-5 mb-3 underline">Products</Text>
         <Carousel
-          autoplay
-          pageWidth={SCREEN_WIDTH * 0.8}
-          containerMarginHorizontal={10}
+          // autoplay
+          pageWidth={200}
+          containerMarginHorizontal={0}
           initialPage={0}
+          itemSpacings={10}
         >
           {productsData.map((product) => (
-            <View key={product._id} className="h-fit w-full bg-blue-200">
-              <Text className="text-center text-xl underline">{product.product_name}</Text>
-              <Text className="text-center text-xl underline">{product.product_price}</Text>
-            </View>
+            <TouchableOpacity key={product._id} className="h-[340px] overflow-hidden  w-full rounded-2xl flex justify-start items-center">
+              <Image 
+                source={{uri: product.product_imgs[0].secure_url}}
+                style={{width: "100%", height: 240, resizeMode: "contain"}}
+              />
+              <View className="h-[100px] w-full bg-[#fff] flex p-2">
+                <Text className="h-[60px] text-2xl">{product.product_name}</Text>
+                <Text className="text-xl ">${product.product_price}</Text>
+              </View>
+            </TouchableOpacity>
           ))}
         </Carousel>
       </View>
