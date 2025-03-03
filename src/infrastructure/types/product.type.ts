@@ -6,9 +6,10 @@ import {
 export type ProductItemType = {
   _id: string;
   id: string;
-  product_name:string;
-  product_price:number;
+  product_name: string;
+  product_price: number;
   product_slug: string;
+  product_imgs: { secure_url: string }[];
 };
 
 export type ProductResponseType = BaseResponseType<
